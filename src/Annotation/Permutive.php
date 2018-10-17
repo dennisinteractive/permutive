@@ -5,14 +5,14 @@ namespace Drupal\permutive\Annotation;
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines a Permutive plugin item annotation object.
+ * Defines a Permutive item annotation object.
  *
- * @see \Drupal\permutive\Plugin\PermutivePluginManager
+ * @see \Drupal\permutive\Plugin\PermutiveManager
  * @see plugin_api
  *
  * @Annotation
  */
-class PermutivePlugin extends Plugin {
+class Permutive extends Plugin {
 
 
   /**

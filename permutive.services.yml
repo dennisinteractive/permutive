@@ -1,4 +1,4 @@
 services:
-  plugin.manager.permutive_plugin:
-    class: Drupal\permutive\Plugin\PermutivePluginManager
+  plugin.manager.permutive:
+    class: Drupal\permutive\Plugin\PermutiveManager
     parent: default_plugin_manager

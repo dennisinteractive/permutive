@@ -5,9 +5,9 @@ namespace Drupal\permutive\Plugin;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 
 /**
- * Defines an interface for Permutive plugin plugins.
+ * Defines an interface for Permutive plugins.
  */
-interface PermutivePluginInterface extends PluginInspectionInterface {
+interface PermutiveInterface extends PluginInspectionInterface {
 
 
   // Add get/set methods for your plugin type here.

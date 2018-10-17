@@ -7,13 +7,13 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
- * Provides the Permutive plugin plugin manager.
+ * Provides the Permutive plugin manager.
  */
-class PermutivePluginManager extends DefaultPluginManager {
+class PermutiveManager extends DefaultPluginManager {
 
 
   /**
-   * Constructs a new PermutivePluginManager object.
+   * Constructs a new PermutiveManager object.
    *
    * @param \Traversable $namespaces
    *   An object that implements \Traversable which contains the root paths
@@ -24,10 +24,10 @@ class PermutivePluginManager extends DefaultPluginManager {
    *   The module handler to invoke the alter hook with.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct('Plugin/PermutivePlugin', $namespaces, $module_handler, 'Drupal\permutive\Plugin\PermutivePluginInterface', 'Drupal\permutive\Annotation\PermutivePlugin');
+    parent::__construct('Plugin/Permutive', $namespaces, $module_handler, 'Drupal\permutive\Plugin\PermutiveInterface', 'Drupal\permutive\Annotation\Permutive');
 
-    $this->alterInfo('permutive_permutive_plugin_info');
-    $this->setCacheBackend($cache_backend, 'permutive_permutive_plugin_plugins');
+    $this->alterInfo('permutive_permutive_info');
+    $this->setCacheBackend($cache_backend, 'permutive_permutive_plugins');
   }
 
 }
