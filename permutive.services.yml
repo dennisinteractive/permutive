@@ -5,4 +5,4 @@ services:
 
   permutive.builder:
     class: Drupal\permutive\PermutiveBuilder
-    arguments: ['@plugin.manager.permutive']
+    arguments: ['@plugin.manager.permutive', '@config.factory']

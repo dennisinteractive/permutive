@@ -3,6 +3,7 @@
 namespace Drupal\permutive;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 class PermutiveBuilder implements PermutiveBuilderInterface {
 
@@ -13,24 +14,30 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
    */
   protected $manager;
 
-  public function __construct(PluginManagerInterface $manager) {
+  /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  public function __construct(PluginManagerInterface $manager, ConfigFactoryInterface $config_factory) {
     $this->manager = $manager;
+    $this->configFactory = $config_factory;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getApiKey() {
-    // TODO: Implement getApiKey() method.
-    return 123;
+    return $this->configFactory->get('permutive.settings')->get('api_key');
   }
 
   /**
    * {@inheritdoc}
    */
   public function getProjectId() {
-    // TODO: Implement getProjectId() method.
-    return 456;
+    return $this->configFactory->get('permutive.settings')->get('project_id');
   }
 
   /**
