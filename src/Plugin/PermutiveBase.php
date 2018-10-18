@@ -9,7 +9,18 @@ use Drupal\Component\Plugin\PluginBase;
  */
 abstract class PermutiveBase extends PluginBase implements PermutiveInterface {
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getType() {
+    return $this->getPluginDefinition()['type'];
+  }
 
-  // Add common methods and abstract methods for your plugin type here.
+  /**
+   * {@inheritdoc}
+   */
+  public function getDataId() {
+    return $this->getPluginDefinition()['data_id'];
+  }
 
 }

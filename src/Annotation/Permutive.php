@@ -31,4 +31,20 @@ class Permutive extends Plugin {
    */
   public $label;
 
+  /**
+   * The Permutive call type.
+   *
+   * @return string
+   *   "addon", "identify", "track", "trigger", "query",
+   *   "segment", "segments", "ready", "on", "once", "user", "consent"
+   */
+  public $type;
+
+  /**
+   * The data id.
+   *
+   * @return string
+   *   The data id; "web"
+   */
+  public $data_id;
 }

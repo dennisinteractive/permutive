@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function permutive_node_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the term_node module.
+    case 'help.page.permutive':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Add Permutive integration, additional addons can be created as "permutive" plugins.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function permutive_page_attachments(array &$attachments) {
+
+  // Not on Admin routes.
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    return;
+  }
+
+  // Not on the home page.
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    return;
+  }
+
+  $manager = \Drupal::service('plugin.manager.permutive');
+  $plugin_definitions = $manager->getDefinitions();
+  foreach ($plugin_definitions as $id => $definition) {
+    /** @var \Drupal\permutive\Plugin\PermutiveInterface $plugin */
+    $plugin = $manager->createInstance($id);
+    //debug($plugin->getType(), $plugin->getDataId(), $plugin->getData());
+  }
+
+}
