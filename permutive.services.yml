@@ -2,3 +2,7 @@ services:
   plugin.manager.permutive:
     class: Drupal\permutive\Plugin\PermutiveManager
     parent: default_plugin_manager
+
+  permutive.builder:
+    class: Drupal\permutive\PermutiveBuilder
+    arguments: ['@plugin.manager.permutive']

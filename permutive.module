@@ -5,6 +5,7 @@
  * Hook implementations.
  */
 
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -24,6 +25,21 @@ function permutive_node_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function permutive_theme() {
+  return [
+    'permutive_tag' => [
+      'variables' => [
+        'project_id' => NULL,
+        'api_key' => NULL,
+        'js_tag' => NULL,
+      ]
+    ],
+  ];
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function permutive_page_attachments(array &$attachments) {
@@ -38,12 +54,36 @@ function permutive_page_attachments(array &$attachments) {
     return;
   }
 
-  $manager = \Drupal::service('plugin.manager.permutive');
-  $plugin_definitions = $manager->getDefinitions();
-  foreach ($plugin_definitions as $id => $definition) {
-    /** @var \Drupal\permutive\Plugin\PermutiveInterface $plugin */
-    $plugin = $manager->createInstance($id);
-    //debug($plugin->getType(), $plugin->getDataId(), $plugin->getData());
+  /** @var \Drupal\permutive\PermutiveBuilderInterface $permutive */
+  $permutive = \Drupal::service('permutive.builder');
+
+  if ($js = $permutive->buildTag()) {
+    // Attach the tag to the page.
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#tag' => 'script',
+        '#attributes' => [
+          'type' => 'text/javascript',
+        ],
+        '#theme' => 'permutive_tag',
+        '#project_id' => $permutive->getProjectId(),
+        '#api_key' => $permutive->getApiKey(),
+        '#js_tag' => Markup::create($js),
+      ],
+      'permutive_tag',
+    ];
+
+    // Attach the application script.
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#tag' => 'script',
+        '#attributes' => [
+          'src' => $permutive->getScriptUrl(),
+          'async' => 'async',
+        ],
+      ],
+      'permutive_app',
+    ];
   }
 
 }
