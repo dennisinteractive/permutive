@@ -4,6 +4,7 @@ namespace Drupal\permutive;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\permutive\Plugin\PermutiveData;
 
 class PermutiveBuilder implements PermutiveBuilderInterface {
 
@@ -56,16 +57,30 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
     foreach ($plugin_definitions as $id => $definition) {
       /** @var \Drupal\permutive\Plugin\PermutiveInterface $plugin */
       $plugin = $this->manager->createInstance($id);
+      // Group the plugins by type & data id.
       $types[$plugin->getType()][$plugin->getDataId()][] = $plugin;
     }
 
-    $js = '';
-    foreach ($types as $type => $data_id) {
-      foreach ($data_id as $plugins) {
-        $js .= 'permutive.' . $type . '("' . $plugin->getDataId() . '", ';
+    //@todo plugin order priority.
+
+    $tags = [];
+    foreach ($types as $type => $data_set) {
+      foreach ($data_set as $data_id => $plugins) {
+        // Pass data for each tag to the plugins to alter.
+        $data = new PermutiveData();
+        $data->setId($data_id);
         foreach ($plugins as $plugin) {
-          $js .= json_encode($plugin->getData());
+          $plugin->alterData($data);
         }
+        $tags[$type][$data->id()] = $data;
+      }
+    }
+
+    $js = '';
+    foreach ($tags as $type => $data_set) {
+      foreach ($data_set as $data_id => $data) {
+        $js .= 'permutive.' . $type . '("' . $data_id . '", ';
+        $js .= json_encode($data->getArray());
         $js .= ');';
       }
     }

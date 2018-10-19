@@ -29,9 +29,10 @@ interface PermutiveInterface extends PluginInspectionInterface {
   /**
    * The data to pass to Permutive.
    *
-   * @return array
-   *   The data array.
+   * @param \Drupal\permutive\Plugin\PermutiveDataInterface $data
+   *   The data object that will become the javascript parameters.
+   *
    */
-  public function getData();
+  public function alterData(PermutiveDataInterface $data);
 
 }

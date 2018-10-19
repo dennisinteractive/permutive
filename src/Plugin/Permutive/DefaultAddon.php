@@ -4,6 +4,7 @@ namespace Drupal\permutive\Plugin\Permutive;
 
 use Drupal\node\NodeInterface;
 use Drupal\permutive\Plugin\PermutiveBase;
+use Drupal\permutive\Plugin\PermutiveDataInterface;
 
 /**
  * The default web addon.
@@ -20,7 +21,7 @@ class DefaultAddon extends PermutiveBase {
   /**
    * {@inheritdoc}
    */
-  public function getData() {
+  public function alterData(PermutiveDataInterface $data) {
     $route_match = \Drupal::routeMatch();
     $token = \Drupal::token();
     $name = $token->replace(
@@ -28,27 +29,23 @@ class DefaultAddon extends PermutiveBase {
       [],
       ['clear' => TRUE]
     );
-    $data['page']['publisher']['name'] = $name;
+    $data->set('page.publisher.name', $name);
 
     // Node values.
     $node = $route_match->getParameter('node');
     if ($node instanceof NodeInterface) {
-      $data['page']['content'] = [
-        'headline' => $token->replace(
-          '[node:title]',
-          ['node' => $node],
-          ['clear' => TRUE]
-        ),
-        'description' => $token->replace(
-          '[node:summary]',
-          ['node' => $node],
-          ['clear' => TRUE]
-        ),
-        'type' => $node->getEntityTypeId(),
-      ];
+      $data->set('page.content.headline', $token->replace(
+        '[node:title]',
+        ['node' => $node],
+        ['clear' => TRUE]
+      ));
+      $data->set('page.content.description', $token->replace(
+        '[node:summary]',
+        ['node' => $node],
+        ['clear' => TRUE]
+      ));
+      $data->set('page.publisher.type', $node->getType());
     }
-
-    return $data;
   }
 
 }
