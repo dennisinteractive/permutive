@@ -33,7 +33,7 @@ class DefaultAddon extends PermutiveBase {
     // Node values.
     $node = $route_match->getParameter('node');
     if ($node instanceof NodeInterface) {
-      $data['content'] = [
+      $data['page']['content'] = [
         'headline' => $token->replace(
           '[node:title]',
           ['node' => $node],
