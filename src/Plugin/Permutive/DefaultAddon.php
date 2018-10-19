@@ -12,6 +12,7 @@ use Drupal\permutive\Plugin\PermutiveDataInterface;
  * @Permutive(
  *   label = "Default addon",
  *   id = "default_addon",
+ *   priority = 0,
  *   type = "addon",
  *   data_id = "web",
  * )

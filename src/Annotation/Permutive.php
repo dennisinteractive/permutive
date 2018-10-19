@@ -32,6 +32,13 @@ class Permutive extends Plugin {
   public $label;
 
   /**
+   * Where in a list of plugins this one sits.
+   *
+   * @var integer
+   */
+  public $priority = 0;
+
+  /**
    * The Permutive call type.
    *
    * @return string

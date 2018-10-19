@@ -52,19 +52,10 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
    * {@inheritdoc}
    */
   public function buildTag() {
-    $types = [];
-    $plugin_definitions = $this->manager->getDefinitions();
-    foreach ($plugin_definitions as $id => $definition) {
-      /** @var \Drupal\permutive\Plugin\PermutiveInterface $plugin */
-      $plugin = $this->manager->createInstance($id);
-      // Group the plugins by type & data id.
-      $types[$plugin->getType()][$plugin->getDataId()][] = $plugin;
-    }
-
-    //@todo plugin order priority.
+    $plugins = $this->getPlugins();
 
     $tags = [];
-    foreach ($types as $type => $data_set) {
+    foreach ($plugins as $type => $data_set) {
       foreach ($data_set as $data_id => $plugins) {
         // Pass data for each tag to the plugins to alter.
         $data = new PermutiveData();
@@ -86,6 +77,34 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
     }
 
     return $js;
+  }
+
+  protected function getPlugins() {
+    $plugins = [];
+    $plugin_definitions = $this->manager->getDefinitions();
+
+    // Order the plugins.
+    $unordered = [];
+    foreach ($plugin_definitions as $id => $definition) {
+      $unordered[$definition['priority']][][$id] = $definition;
+    }
+    $ordered = [];
+    foreach ($unordered as $array) {
+      foreach ($array as $plugin_definitions) {
+        foreach ($plugin_definitions as $id => $definition) {
+          $ordered[$id] = $definition;
+        }
+      }
+    }
+
+    foreach ($ordered as $id => $definition) {
+      /** @var \Drupal\permutive\Plugin\PermutiveInterface $plugin */
+      $plugin = $this->manager->createInstance($id);
+      // Group the plugins by type & data id.
+      $plugins[$plugin->getType()][$plugin->getDataId()][] = $plugin;
+    }
+
+    return $plugins;
   }
 
 }
