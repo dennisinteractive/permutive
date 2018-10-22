@@ -45,13 +45,13 @@ class Permutive extends Plugin {
    *   "addon", "identify", "track", "trigger", "query",
    *   "segment", "segments", "ready", "on", "once", "user", "consent"
    */
-  public $type;
+  public $type = 'addon';
 
   /**
-   * The data id.
+   * The client type.
    *
    * @return string
    *   The data id; "web"
    */
-  public $data_id;
+  public $client_type = 'web';
 }

@@ -5,22 +5,22 @@ namespace Drupal\permutive\Plugin;
 interface PermutiveDataInterface {
 
   /**
-   * The data id.
+   * The the client type.
    *
    * @return string
    */
-  public function id();
+  public function getClientType();
 
   /**
-   * Sets the data id.
+   * Sets the client type.
    *
    * @param $id
-   *   The id to set, for example 'web'.
+   *   The type to set, for example 'web'.
    *
    * @return $this
    *   The data object.
    */
-  public function setId($id);
+  public function setClientType($client_type);
 
   /**
    * Gets data from this data object.

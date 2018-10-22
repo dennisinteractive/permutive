@@ -19,8 +19,8 @@ abstract class PermutiveBase extends PluginBase implements PermutiveInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDataId() {
-    return $this->getPluginDefinition()['data_id'];
+  public function getClientType() {
+    return $this->getPluginDefinition()['client_type'];
   }
 
 }

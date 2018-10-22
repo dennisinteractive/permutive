@@ -19,12 +19,12 @@ interface PermutiveInterface extends PluginInspectionInterface {
   public function getType();
 
   /**
-   * The data id.
+   * The client type.
    *
    * @return string
-   *   The data id; "web"
+   *   The client type; "web"
    */
-  public function getDataId();
+  public function getClientType();
 
   /**
    * The data to pass to Permutive.

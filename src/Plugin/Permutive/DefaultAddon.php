@@ -14,7 +14,7 @@ use Drupal\permutive\Plugin\PermutiveDataInterface;
  *   id = "default_addon",
  *   priority = 0,
  *   type = "addon",
- *   data_id = "web",
+ *   client_type = "web",
  * )
  */
 class DefaultAddon extends PermutiveBase {

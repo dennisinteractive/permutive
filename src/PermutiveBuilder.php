@@ -56,21 +56,21 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
 
     $tags = [];
     foreach ($plugins as $type => $data_set) {
-      foreach ($data_set as $data_id => $plugins) {
+      foreach ($data_set as $client_type => $plugins) {
         // Pass data for each tag to the plugins to alter.
         $data = new PermutiveData();
-        $data->setId($data_id);
+        $data->setClientType($client_type);
         foreach ($plugins as $plugin) {
           $plugin->alterData($data);
         }
-        $tags[$type][$data->id()] = $data;
+        $tags[$type][$data->getClientType()] = $data;
       }
     }
 
     $js = '';
     foreach ($tags as $type => $data_set) {
-      foreach ($data_set as $data_id => $data) {
-        $js .= 'permutive.' . $type . '("' . $data_id . '", ';
+      foreach ($data_set as $client_type => $data) {
+        $js .= 'permutive.' . $type . '("' . $client_type . '", ';
         $js .= json_encode($data->getArray());
         $js .= ');';
       }
@@ -101,7 +101,7 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
       /** @var \Drupal\permutive\Plugin\PermutiveInterface $plugin */
       $plugin = $this->manager->createInstance($id);
       // Group the plugins by type & data id.
-      $plugins[$plugin->getType()][$plugin->getDataId()][] = $plugin;
+      $plugins[$plugin->getType()][$plugin->getClientType()][] = $plugin;
     }
 
     return $plugins;

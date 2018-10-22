@@ -19,24 +19,24 @@ class PermutiveData implements PermutiveDataInterface {
   protected $data = [];
 
   /**
-   * The data id.
+   * The client type.
    *
    * @var string
    */
-  protected $id;
+  protected $clientType;
 
   /**
    * {@inheritdoc}
    */
-  public function id() {
-    return $this->id;
+  public function getClientType() {
+    return $this->clientType;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setId($id) {
-    $this->id = $id;
+  public function setClientType($client_type) {
+    $this->clientType = $client_type;
 
     return $this;
   }
