@@ -2,6 +2,11 @@
 
 namespace Drupal\permutive;
 
+/**
+ * Interface PermutiveBuilderInterface.
+ *
+ * @package Drupal\permutive
+ */
 interface PermutiveBuilderInterface {
 
   /**
@@ -24,6 +29,7 @@ interface PermutiveBuilderInterface {
    * Your Permutive api key.
    *
    * @return string
+   *   The api key.
    */
   public function getApiKey();
 
@@ -31,6 +37,7 @@ interface PermutiveBuilderInterface {
    * Your Permutive project id.
    *
    * @return string
+   *   The project id.
    */
   public function getProjectId();
 

@@ -11,7 +11,6 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
  */
 class PermutiveManager extends DefaultPluginManager {
 
-
   /**
    * Constructs a new PermutiveManager object.
    *

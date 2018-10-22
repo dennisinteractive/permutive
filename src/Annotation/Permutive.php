@@ -34,14 +34,14 @@ class Permutive extends Plugin {
   /**
    * Where in a list of plugins this one sits.
    *
-   * @var integer
+   * @var int
    */
   public $priority = 0;
 
   /**
    * The Permutive call type.
    *
-   * @return string
+   * @var string
    *   "addon", "identify", "track", "trigger", "query",
    *   "segment", "segments", "ready", "on", "once", "user", "consent"
    */
@@ -50,8 +50,9 @@ class Permutive extends Plugin {
   /**
    * The client type.
    *
-   * @return string
+   * @var string
    *   The data id; "web"
    */
-  public $client_type = 'web';
+  public $clientType = 'web';
+
 }

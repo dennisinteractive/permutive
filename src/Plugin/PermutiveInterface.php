@@ -31,7 +31,6 @@ interface PermutiveInterface extends PluginInspectionInterface {
    *
    * @param \Drupal\permutive\Plugin\PermutiveDataInterface $data
    *   The data object that will become the javascript parameters.
-   *
    */
   public function alterData(PermutiveDataInterface $data);
 

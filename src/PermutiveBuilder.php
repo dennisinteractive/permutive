@@ -6,6 +6,11 @@ use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\permutive\Plugin\PermutiveData;
 
+/**
+ * Class PermutiveBuilder.
+ *
+ * @package Drupal\permutive
+ */
 class PermutiveBuilder implements PermutiveBuilderInterface {
 
   /**
@@ -22,6 +27,14 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
    */
   protected $configFactory;
 
+  /**
+   * PermutiveBuilder constructor.
+   *
+   * @param \Drupal\Component\Plugin\PluginManagerInterface $manager
+   *   The plugin manager.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config manager.
+   */
   public function __construct(PluginManagerInterface $manager, ConfigFactoryInterface $config_factory) {
     $this->manager = $manager;
     $this->configFactory = $config_factory;
@@ -79,6 +92,14 @@ class PermutiveBuilder implements PermutiveBuilderInterface {
     return $js;
   }
 
+  /**
+   * Gets the plugins ordered by priority.
+   *
+   * @return \Drupal\permutive\Plugin\PermutiveInterface[]
+   *   An array of Permutive plugins keyed by type & client type.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\PluginException
+   */
   protected function getPlugins() {
     $plugins = [];
     $plugin_definitions = $this->manager->getDefinitions();

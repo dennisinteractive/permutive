@@ -2,19 +2,25 @@
 
 namespace Drupal\permutive\Plugin;
 
+/**
+ * Interface PermutiveDataInterface.
+ *
+ * @package Drupal\permutive\Plugin
+ */
 interface PermutiveDataInterface {
 
   /**
    * The the client type.
    *
    * @return string
+   *   The client type.
    */
   public function getClientType();
 
   /**
    * Sets the client type.
    *
-   * @param $id
+   * @param string $client_type
    *   The type to set, for example 'web'.
    *
    * @return $this
@@ -27,14 +33,14 @@ interface PermutiveDataInterface {
    *
    * @param string $key
    *   A string that maps to a key within the configuration data.
-   *   For instance in the following configuration array:
-   *   @code
+   *
+   * @code
    *   array(
    *     'foo' => array(
    *       'bar' => 'baz',
    *     ),
    *   );
-   *   @endcode
+   * @endcode
    *   A key of 'foo.bar' would return the string 'baz'. However, a key of 'foo'
    *   would return array('bar' => 'baz').
    *   If no key is specified, then the entire data array is returned.

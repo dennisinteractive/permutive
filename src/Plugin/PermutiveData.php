@@ -5,7 +5,7 @@ namespace Drupal\permutive\Plugin;
 use Drupal\Component\Utility\NestedArray;
 
 /**
- * Class PermutiveData
+ * Class PermutiveData.
  *
  * @package Drupal\permutive\Plugin
  */

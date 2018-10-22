@@ -34,7 +34,7 @@ function permutive_theme() {
         'project_id' => NULL,
         'api_key' => NULL,
         'js_tag' => NULL,
-      ]
+      ],
     ],
   ];
 }
